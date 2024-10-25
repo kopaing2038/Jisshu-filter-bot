@@ -1,6 +1,8 @@
 # powered by Jisshu_bots and ZISHAN KHAN
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from utils import temp
+
 
 @Client.on_message(filters.command("link"))
 async def generate_link(client, message):
@@ -9,7 +11,7 @@ async def generate_link(client, message):
         await message.reply("Please provide the name for the movie! Example: `/link game of thrones`")
         return
     movie_name = command_text[1].replace(" ", "-")
-    link = f"https://telegram.me/NehaTestBot?start=getfile-{movie_name}"
+    link = f"https://telegram.me/{temp.U_NAME}?start=getfile-{movie_name}"
     
     await message.reply(
         text=f"Here is your link: {link}",
