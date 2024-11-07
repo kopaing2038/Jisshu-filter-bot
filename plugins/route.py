@@ -56,16 +56,11 @@ async def football_stream_handler(request: web.Request):
         # If 'link' exists in the file data, return it
         if "link" in file_data:
             src = file_data["link"]
-            
-            # Read the football.html template file
-            template_path = "Jisshu/template/football.html"
-            with open(template_path, "r") as file:
-                html_template = file.read()
-            
-            # Replace dynamic content (e.g., {{link}}) with the actual stream URL
-            html_content = html_template.replace("{{link}}", src)
-            
-            # Return the rendered HTML content
+            # Serve the HTML page with the stream link
+            with open("Jisshu/template/football.html", "r") as f:
+                template_content = f.read()
+                # Replace placeholder with actual video URL
+                html_content = template_content.replace("{{ video_url }}", src)
             return web.Response(text=html_content, content_type='text/html')
         else:
             return web.Response(text="Stream link not available", status=404)
@@ -73,7 +68,6 @@ async def football_stream_handler(request: web.Request):
         return web.Response(text=f"Error: {str(e)}", status=404)
     except Exception as e:
         return web.Response(text=f"Internal Server Error: {str(e)}", status=500)
-
 
 
 
