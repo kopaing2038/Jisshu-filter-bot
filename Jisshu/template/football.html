@@ -10,6 +10,9 @@
             background-color: black;
             color: white; /* Optional: To make text visible on black background */
             text-align: center; /* Center the content */
+            margin: 0;
+            padding: 0;
+            position: relative; /* Ensure positioning of child elements */
         }
         #logo {
             max-width: 200px; /* Set logo size */
@@ -33,13 +36,27 @@
         #playButton:hover {
             background-color: #45a049; /* Darker green on hover */
         }
+
+        /* Banner Style */
         #banner {
-            background-color: #333; /* Dark background for banner */
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
             color: white; /* White text */
             padding: 10px 0;
             font-size: 18px;
             font-weight: bold;
-            margin-top: 10px; /* Space between banner and logo */
+            position: absolute;
+            top: 20px; /* Position the banner at the top of the page */
+            left: 0;
+            right: 0;
+            z-index: 2; /* Ensure the banner appears on top of the video */
+        }
+
+        /* Video Player */
+        #player {
+            width: 100%;
+            height: 100vh; /* Make the video take full screen */
+            object-fit: cover; /* Ensure the video covers the screen area */
+            position: relative;
         }
     </style>
 </head>
@@ -61,7 +78,7 @@
         <div class="inner">
             <div class="main" id="main">
                 <!-- Video Player Integration -->
-                <video id="player" class="player" controls width="80%" playsinline></video>
+                <video id="player" class="player" controls playsinline></video>
             </div>
         </div>
     </div>
@@ -72,7 +89,7 @@
     <script>
         // HLS.js player setup
         var video = document.getElementById('player');
-        var videoUrl = "{{ video_url }}";
+        var videoUrl = "{{ video_url }}";  // Replace with your actual video URL
 
         // Check if the browser supports HLS.js
         if (Hls.isSupported()) {
