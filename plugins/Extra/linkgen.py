@@ -48,6 +48,6 @@ async def gen(client, message):
             os.remove(file)
 
     _id = await add_link(message_s)
-    html_link = f'<a href="{URL}:{PORT}/football/{_id}">Click here</a>'
+    html_link = f'<a href="{URL}/football/{_id}">Click here</a>'
     pasted = f"**Successfully Gen **\n\n**Link:** {html_link}\n\n"
     await pablo.edit(pasted, disable_web_page_preview=True)
