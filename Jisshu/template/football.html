@@ -12,14 +12,9 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
         #video-container {
             position: relative;
-            flex-grow: 1;
         }
         #logo {
             max-width: 200px;
@@ -75,48 +70,52 @@
             }
         }
 
-        /* Copyright section */
+        /* Copyright Section */
         #copyright {
-            background-color: #222;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Slight transparent background */
             color: white;
+            text-align: center;
             padding: 10px;
             font-size: 14px;
-            text-align: center;
         }
     </style>
 </head>
 <body>
+
+   # <!-- Logo Section -->
+    #<div>
+        #<img id="logo" src="your-logo-url.png" alt="Football Stream Logo">
+    #</div>
+
+    <!-- Football Stream Title -->
+    <div id="title">TP Football Live</div>
+
+    <div id="banner">
+        <p>Welcome to TP Football Live! Enjoy the match!</p>
+    </div>
+
     <!-- Video Container with Overlay Banner -->
     <div id="video-container">
         <!-- Banner Section -->
         <div id="banner">
-            <p>Welcome to TP Football Live! Enjoy the match!</p>
+            <p>Welcome to TP Football Live!</p>
         </div>
 
         <!-- Video Player Integration -->
         <video id="player" class="player" controls width="80%" playsinline></video>
     </div>
 
-    <!-- Logo Section -->
-    <div>
-        <img id="logo" src="your-logo-url.png" alt="Football Stream Logo">
-    </div>
 
-    <!-- Football Stream Title -->
-    <div id="title">TP Football Live</div>
-
-    <div class="outer">
-        <div class="inner">
-            <div class="main" id="main"></div>
-        </div>
-    </div>
 
     <!-- Play Button -->
     <button id="playButton">Play</button>
 
-    <!-- Copyright Section -->
+    <!-- Copyright Notice -->
     <div id="copyright">
-        &copy; 2024 TP Football Live. All rights reserved.
+        &copy;CopyRight @ 2024 TP Football Live. All Rights Reserved.
     </div>
 
     <script>
@@ -124,21 +123,16 @@
         var video = document.getElementById('player');
         var videoUrl = "{{ video_url }}";
 
-        // Check if the browser supports HLS.js
         if (Hls.isSupported()) {
             var hls = new Hls();
             hls.loadSource(videoUrl);
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                // Auto-play when the manifest is parsed
                 video.play();
             });
-        }
-        // Fallback to native browser support for HLS if available (for Safari)
-        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = videoUrl;
             video.addEventListener('loadedmetadata', function () {
-                // Auto-play when metadata is loaded
                 video.play();
             });
         }
@@ -146,11 +140,11 @@
         // Play button functionality
         document.getElementById('playButton').addEventListener('click', function() {
             if (video.paused) {
-                video.play(); // Play the video
-                this.textContent = 'Pause'; // Change button text to 'Pause'
+                video.play();
+                this.textContent = 'Pause';
             } else {
-                video.pause(); // Pause the video
-                this.textContent = 'Play'; // Change button text back to 'Play'
+                video.pause();
+                this.textContent = 'Play';
             }
         });
     </script>
