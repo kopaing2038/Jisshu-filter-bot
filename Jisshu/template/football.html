@@ -4,13 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Football Stream</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Football Stream</h1>
-    <p>Enjoy live football streaming here.</p>
-    <video controls autoplay width="100%" height="auto">
-        <source src="{stream_url}" type="application/x-mpegURL">
-        Your browser does not support the video tag.
-    </video>
+
+    <div id="player-container">
+        <video id="player-stream" controls autoplay>
+            <source id="stream-source" src="" type="application/x-mpegURL">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+
+    <script type="text/javascript">
+        function load_stream() {
+            let match_time = jQuery("#player-stream").attr("data-time");
+            let timestamp = new Date().getTime();
+            let overmin = ((timestamp - match_time * 1000)) / (60 * 1000);
+            let stream_HDlink = "https://pull.niues.live/live/stream-9912096_lhd.m3u8?auth_key=1730975968-0-0-471a115a461fa92821827e27dd87afc2";
+            let stream_link = "https://pull.niues.live/live/stream-9912096_lsd.m3u8?auth_key=1730975968-0-0-20eebd816fc5cf2ff433c81b2baa5966";
+            let mode_stream = "";
+            let timeend = "";
+            let timeendTimestamp = timeend ? parseInt(timeend, 10) * 1000 : "";
+            let isTimeendValid = timeendTimestamp === "" || (timestamp - timeendTimestamp) <= 3 * 60 * 1000;
+            const urlErrorCodes = [232001, 232600, 232631];
+
+            if (timestamp > (match_time * 1000 - 600000) && isTimeendValid) {
+                let thumb_pl = "https://acebot.ai/wp-content/uploads/truc-tiep/thumbnails/NDc5NDQyNzA3MTczMDc0OTI3Mw==.webp";
+
+                // Choose stream based on conditions
+                let streamToLoad = overmin <= 10 ? stream_HDlink : stream_link;
+
+                // Update the player source
+                jQuery("#stream-source").attr("src", streamToLoad);
+                jQuery("#player-stream")[0].load();  // Reload the video player
+                console.log("Stream URL set: " + streamToLoad);
+            } else {
+                // Handle error conditions or fallback logic
+                console.error("Stream is not ready yet or expired.");
+            }
+        }
+
+        // Call the function on page load
+        $(document).ready(function() {
+            load_stream();
+        });
+    </script>
+
 </body>
 </html>
