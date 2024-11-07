@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Football Stream</title>
 </head>
-<body>
-    <h1>Football Stream</h1>
-    <video width="100%" controls>
-        <source src="https://pull.niues.live/live/stream-9912096_lhd.m3u8?auth_key=1730975968-0-0-471a115a461fa92821827e27dd87afc2" type="application/x-mpegURL">
-        Your browser does not support the video tag.
-    </video>
-</body>
+<center>
+    <div class="outer">
+        <div class="inner">
+            <div class="main" id="main">
+                <!-- Video Player Integration -->
+                <video id="player" class="player" src="https://pull.niues.live/live/stream-9912096_lhd.m3u8?auth_key=1730975968-0-0-471a115a461fa92821827e27dd87afc2" type="application/x-mpegURL" playsinline controls width="80%"></video>
+            </div>
+        </div>
+    </div>
+</center>
+
 </html>
