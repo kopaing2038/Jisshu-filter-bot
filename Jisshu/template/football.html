@@ -1,0 +1,18 @@
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Football Stream</title>
+    </head>
+    <body>
+        <h1>Football Live Stream</h1>
+        <video controls autoplay width="100%" height="auto">
+            <source src="{stream_url}" type="application/vnd.apple.mpegurl">
+            Your browser does not support the video tag.
+        </video>
+        <p>If the video does not play, please check your network connection or try refreshing the page.</p>
+    </body>
+    </html>
+    """
