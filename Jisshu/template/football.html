@@ -7,13 +7,9 @@
 </head>
 <body>
     <h1>Football Stream</h1>
-    {% if video_url %}
-        <video width="100%" controls>
-            <source src="{{ video_url }}" type="application/x-mpegURL">
-            Your browser does not support the video tag.
-        </video>
-    {% else %}
-        <p>Stream not available.</p>
-    {% endif %}
+    <video width="100%" controls>
+        <source src="{{ video_url }}" type="application/x-mpegURL">
+        Your browser does not support the video tag.
+    </video>
 </body>
 </html>
