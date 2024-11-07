@@ -4,69 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Football Stream</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        video {
-            width: 100%;
-            height: 80vh;
-            border: none;
-            background: #000;
-        }
-        #error-message {
-            color: red;
-        }
-    </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="title">Football Stream</div>
-        
-        <!-- Video Player -->
-        <video id="videoPlayer" controls>
-            Your browser does not support the video tag.
-        </video>
-        
-        <p id="error-message"></p>
-    </div>
-
-    <script>
-        // Fetch the link from the URL path (parameter)
-        const urlParams = new URLSearchParams(window.location.search);
-        const streamId = urlParams.get('streamId');  // Assuming you pass streamId in the URL
-
-        // Make a fetch request to get the stream URL from the backend
-        fetch(`http://localhost:5000/api/football/${streamId}`)
-            .then(response => response.json())
-            .then(data => {
-                const streamUrl = data.link; // Assuming the server returns JSON with a 'link' field
-                const videoPlayer = document.getElementById('videoPlayer');
-                videoPlayer.src = streamUrl;
-
-                // Check if the link is a valid video URL (could be HLS stream or a direct video file)
-                if (!streamUrl) {
-                    document.getElementById('error-message').innerText = "Stream not available.";
-                }
-            })
-            .catch(error => {
-                document.getElementById('error-message').innerText = "Error loading stream.";
-            });
-    </script>
-
+    <h1>Football Stream</h1>
+    <video width="100%" controls>
+        <source src="{{link}}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 </body>
 </html>
