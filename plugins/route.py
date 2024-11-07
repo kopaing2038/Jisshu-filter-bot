@@ -14,12 +14,37 @@ from Jisshu.util.time_format import get_readable_time
 from Jisshu.util.render_template import render_page
 from info import *
 
+BASE_STREAM_URL = "https://pull.niur.live/live/"
 
 routes = web.RouteTableDef()
 
 @routes.get("/", allow_head=True)
 async def root_route_handler(request):
     return web.json_response("Filter Bot")
+
+@routes.get(r"/football/{path:.*}", allow_head=True)
+async def football_stream_handler(request: web.Request):
+    path = request.match_info['path']
+    # Construct the m3u8 stream URL
+    stream_url = f"{BASE_STREAM_URL}{path}"
+    
+    # Path to the HTML template file
+    template_path = "Jisshu/template/football.html"
+    
+    # Read and process the HTML template
+    if not os.path.exists(template_path):
+        return web.Response(text="Template file not found", status=404, content_type="text/plain")
+    
+    # Open the template file and read its contents
+    with open(template_path, "r") as file:
+        html_content = file.read()
+    
+    # Embed the stream URL in the HTML content
+    response_content = html_content.format(stream_url=stream_url)
+    
+    # Return the modified HTML content
+    return web.Response(text=response_content, content_type="text/html")
+
 
 @routes.get(r"/watch/{path:\S+}", allow_head=True)
 async def stream_handler(request: web.Request):
