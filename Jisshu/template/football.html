@@ -10,9 +10,11 @@
             background-color: black;
             color: white; /* Optional: To make text visible on black background */
             text-align: center; /* Center the content */
-            margin: 0;
-            padding: 0;
-            position: relative; /* Ensure positioning of child elements */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+        #video-container {
+            position: relative; /* Set relative positioning for the video container */
         }
         #logo {
             max-width: 200px; /* Set logo size */
@@ -36,34 +38,30 @@
         #playButton:hover {
             background-color: #45a049; /* Darker green on hover */
         }
-
-        /* Banner Style */
         #banner {
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            position: absolute; /* Absolute position to overlay on the video */
+            top: 20px; /* Adjust position */
+            left: 50%;
+            transform: translateX(-50%); /* Center the banner horizontally */
+            background-color: rgba(51, 51, 51, 0.7); /* Semi-transparent dark background */
             color: white; /* White text */
-            padding: 10px 0;
+            padding: 10px 20px;
             font-size: 18px;
             font-weight: bold;
-            position: absolute;
-            top: 20px; /* Position the banner at the top of the page */
-            left: 0;
-            right: 0;
-            z-index: 2; /* Ensure the banner appears on top of the video */
-        }
-
-        /* Video Player */
-        #player {
-            width: 100%;
-            height: 100vh; /* Make the video take full screen */
-            object-fit: cover; /* Ensure the video covers the screen area */
-            position: relative;
+            z-index: 2; /* Ensure banner is on top of the video */
         }
     </style>
 </head>
 <body>
-    <!-- Banner Section -->
-    <div id="banner">
-        <p>Welcome to TP Football Live! Enjoy the match!</p>
+    <!-- Video Container with Overlay Banner -->
+    <div id="video-container">
+        <!-- Banner Section -->
+        <div id="banner">
+            <p>Welcome to TP Football Live! Enjoy the match!</p>
+        </div>
+
+        <!-- Video Player Integration -->
+        <video id="player" class="player" controls width="80%" playsinline></video>
     </div>
 
     <!-- Logo Section -->
@@ -76,10 +74,7 @@
 
     <div class="outer">
         <div class="inner">
-            <div class="main" id="main">
-                <!-- Video Player Integration -->
-                <video id="player" class="player" controls playsinline></video>
-            </div>
+            <div class="main" id="main"></div>
         </div>
     </div>
 
@@ -89,7 +84,7 @@
     <script>
         // HLS.js player setup
         var video = document.getElementById('player');
-        var videoUrl = "{{ video_url }}";  // Replace with your actual video URL
+        var videoUrl = "{{ video_url }}";
 
         // Check if the browser supports HLS.js
         if (Hls.isSupported()) {
