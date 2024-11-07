@@ -8,26 +8,26 @@
     <style>
         body {
             background-color: black;
-            color: white; /* Optional: To make text visible on black background */
-            text-align: center; /* Center the content */
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
         }
         #video-container {
-            position: relative; /* Set relative positioning for the video container */
+            position: relative;
         }
         #logo {
-            max-width: 200px; /* Set logo size */
+            max-width: 200px;
             margin-top: 20px;
         }
         #title {
-            font-size: 36px; /* Font size for the title */
+            font-size: 36px;
             font-weight: bold;
-            margin-top: 20px; /* Space between logo and title */
+            margin-top: 20px;
         }
         #playButton {
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
+            background-color: #4CAF50;
+            color: white;
             border: none;
             padding: 15px 32px;
             font-size: 20px;
@@ -36,33 +36,43 @@
             border-radius: 5px;
         }
         #playButton:hover {
-            background-color: #45a049; /* Darker green on hover */
+            background-color: #45a049;
         }
+        /* Scrolling Banner */
         #banner {
-            position: absolute; /* Absolute position to overlay on the video */
-            top: 20px; /* Adjust position */
+            position: absolute;
+            top: 20px;
             left: 50%;
-            transform: translateX(-50%); /* Center the banner horizontally */
-            background-color: rgba(51, 51, 51, 0.7); /* Semi-transparent dark background */
-            color: white; /* White text */
+            transform: translateX(-50%);
+            background-color: rgba(51, 51, 51, 0.7);
+            color: white;
             padding: 10px 20px;
             font-size: 18px;
             font-weight: bold;
-            z-index: 2; /* Ensure banner is on top of the video */
+            z-index: 2;
+            white-space: nowrap; /* Prevent text from wrapping */
+            overflow: hidden; /* Hide overflow */
+            width: 100%; /* Make it full width */
+        }
+
+        #banner p {
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            animation: scroll-banner 15s linear infinite; /* Scroll animation */
+        }
+
+        @keyframes scroll-banner {
+            0% {
+                transform: translateX(100%); /* Start from right */
+            }
+            100% {
+                transform: translateX(-100%); /* End at left */
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Video Container with Overlay Banner -->
-    <div id="video-container">
-        <!-- Banner Section -->
-        <div id="banner">
-            <p>Welcome to TP Football Live! Enjoy the match!</p>
-        </div>
-
-        <!-- Video Player Integration -->
-        <video id="player" class="player" controls width="80%" playsinline></video>
-    </div>
 
     <!-- Logo Section -->
     <div>
@@ -77,6 +87,19 @@
             <div class="main" id="main"></div>
         </div>
     </div>
+
+
+    <!-- Video Container with Overlay Banner -->
+    <div id="video-container">
+        <!-- Banner Section -->
+        <div id="banner">
+            <p>Welcome to TP Football Live! Enjoy the match!</p>
+        </div>
+
+        <!-- Video Player Integration -->
+        <video id="player" class="player" controls width="80%" playsinline></video>
+    </div>
+
 
     <!-- Play Button -->
     <button id="playButton">Play</button>
