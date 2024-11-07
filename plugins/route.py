@@ -27,17 +27,41 @@ mont = MongoClient(DATABASE_URI)
 db = mont[DATABASE_NAME]
 collection = db["footballdb_link"]
 
-# Route for fetching the stream link from the database
+from aiohttp import web
+from bson.objectid import ObjectId
+import json
+
 @routes.get(r"/football/{path:.*}", allow_head=True)
 async def football_stream_handler(request: web.Request):
     path = request.match_info['path']
-
-    link_record = collection.find_one({"_id": path})
     
-    if link_record:
-        return web.json_response({"link": link_record["link"]})
-    else:
-        return web.json_response({"error": "Stream not found"}, status=404)
+    try:
+        # Convert path to ObjectId
+        stream_id = ObjectId(path)
+        
+        # Query MongoDB to find the stream link using the provided ID
+        link_record = collection.find_one({"_id": stream_id})
+        
+        # If no link is found, return a 404 error
+        if not link_record:
+            return web.Response(text="Stream not found", status=404)
+        
+        # Get the link from the database record
+        stream_url = link_record.get('link')
+        
+        if not stream_url:
+            return web.Response(text="Link is missing", status=404)
+        
+        # Return the link as JSON response
+        return web.Response(
+            content_type='application/json',
+            text=json.dumps({'link': stream_url})
+        )
+
+    except Exception as e:
+        # In case of any errors, return an error message
+        return web.Response(text=f"Error: {str(e)}", status=500)
+
 
 
 
