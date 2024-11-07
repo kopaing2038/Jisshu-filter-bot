@@ -15,6 +15,7 @@
         }
         #video-container {
             position: relative;
+            width: 100%;
         }
         #logo {
             max-width: 200px;
@@ -114,6 +115,43 @@
             padding: 10px;
             font-size: 14px;
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            #title {
+                font-size: 28px;
+            }
+            #player {
+                width: 100% !important; /* Make the video take up full width on small screens */
+            }
+            #playButton {
+                width: 80%; /* Make the play button more accessible */
+                font-size: 18px;
+            }
+            #banner {
+                font-size: 14px;
+                padding: 5px 10px;
+            }
+            #banner_down {
+                font-size: 14px;
+                padding: 5px 10px;
+                width: 100%; /* Ensure the banner width is responsive */
+            }
+        }
+
+        @media (max-width: 480px) {
+            #title {
+                font-size: 24px;
+            }
+            #playButton {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            #banner, #banner_down {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -129,15 +167,13 @@
         </div>
 
         <!-- Video Player Integration -->
-        <video id="player" class="player" controls width="85%" playsinline></video>
+        <video id="player" class="player" controls playsinline></video>
     </div>
-
 
     <!-- Banner Down Section -->
     <div id="banner_down">
         <p>✳️ Oh My Game App ထဲမှာ ✳️ 💎 Mobile Legends Diamonds 💎 🔰 PUBG UC 🔰🔰Mytel Data 🔰 ✳️ 24နာရီပိတ်ရက်မရှိ မိမိကိုယ်တိုင်လွယ်ကူလျင်မြန်စွာဝယ်ယူလို့ရပါတယ် နော် ✳️ https://ohmygame.org/ ✳️(Viber 09756486230) ✳️Telegram @Thuta20022</p>
     </div>
-
 
     <!-- Play Button -->
     <button id="playButton">Play</button>
