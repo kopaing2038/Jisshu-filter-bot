@@ -15,6 +15,8 @@
         }
         #video-container {
             position: relative;
+            width: 100%;
+            height: 100%;
         }
         #logo {
             max-width: 200px;
@@ -70,20 +72,19 @@
             }
         }
 
-        /* Banner down section */
+        /* Banner at the bottom */
         #banner_down {
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            z-index: 2;
-            white-space: nowrap;
-            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            font-size: 16px;
             width: 100%;
+            z-index: 3;
+            text-align: center;
         }
 
         /* Copyright section */
@@ -113,6 +114,7 @@
     <!-- Football Stream Title -->
     <div id="title">TP Football Live!</div>
 
+
     <!-- Video Container with Overlay Banner -->
     <div id="video-container">
         <!-- Banner Section -->
@@ -123,7 +125,7 @@
         <!-- Video Player Integration -->
         <video id="player" class="player" controls width="85%" playsinline></video>
 
-        <!-- Banner Down Section -->
+        <!-- Bottom Banner Section -->
         <div id="banner_down">
             <p>✳️ Oh My Game App ထဲမှာ ✳️ 💎 Mobile Legends Diamonds 💎 🔰 PUBG UC 🔰🔰Mytel Data 🔰 ✳️ 24နာရီပိတ်ရက်မရှိ မိမိကိုယ်တိုင်လွယ်ကူလျင်မြန်စွာဝယ်ယူလို့ရပါတယ် နော် ✳️ https://ohmygame.org/ ✳️(Viber 09756486230) ✳️Telegram @Thuta20022</p>
         </div>
@@ -131,6 +133,7 @@
 
     <!-- Play Button -->
     <button id="playButton">Play</button>
+
 
     <!-- Copyright Section -->
     <div id="copyright">
