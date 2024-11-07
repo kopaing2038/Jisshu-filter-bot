@@ -83,7 +83,7 @@ async def Jisshu_start():
     await JisshuBot.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
     app = web.AppRunner(await web_server())
     await app.setup()
-    bind_address = "0.0.0.0"
+    bind_address = "172.233.62.16"
     await web.TCPSite(app, bind_address, PORT).start()
     await idle()
 
