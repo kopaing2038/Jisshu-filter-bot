@@ -34,11 +34,10 @@ class FileNotFoundError(Exception):
 # Asynchronous function to fetch file data from MongoDB using ObjectId
 async def get_file(_id):
     try:
-        # Convert path to ObjectId for MongoDB query
-        object_id = ObjectId(_id)
-        file_info = collection.find_one({"_id": object_id})
+
+        file_info = collection.find_one({"_id": _id})
         if not file_info:
-            raise FileNotFoundError(f"File with ID {object_id} not found.")
+            raise FileNotFoundError(f"File with ID {_id} not found.")
         return file_info
     except Exception as e:
         raise FileNotFoundError(str(e))
