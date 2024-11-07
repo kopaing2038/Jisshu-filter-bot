@@ -7,20 +7,13 @@
 </head>
 <body>
     <h1>Football Stream</h1>
-    <video id="football-video" width="100%" controls>
-        <!-- Dynamically set the video URL here -->
-        <source src="{{ video_url }}" type="application/x-mpegURL">
-        Your browser does not support the video tag.
-    </video>
-
-    <script>
-        // Example of dynamically updating the video source using JavaScript
-        const videoUrl = "{{ video_url }}"; // Replace this with the actual video URL dynamically
-        const videoElement = document.getElementById("football-video");
-
-        // Update the video source
-        videoElement.src = videoUrl;
-        videoElement.load(); // Reload the video with the new source
-    </script>
+    {% if video_url %}
+        <video width="100%" controls>
+            <source src="{{ video_url }}" type="application/x-mpegURL">
+            Your browser does not support the video tag.
+        </video>
+    {% else %}
+        <p>Stream not available.</p>
+    {% endif %}
 </body>
 </html>
