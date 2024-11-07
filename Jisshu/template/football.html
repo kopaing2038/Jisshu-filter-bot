@@ -3,13 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Stream</title>
+    <title>Embedded Video Player</title>
+    <style>
+        body {
+            background-color: black; /* Set background color to black */
+            display: flex;
+            justify-content: center; /* Center align the video player horizontally */
+            align-items: center; /* Center align the video player vertically */
+            height: 100vh; /* Make the body take the full height of the viewport */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .outer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    </style>
+
 </head>
 <body>
-    <h1>Football Stream</h1>
-    <video width="100%" controls>
-        <source src="{{ video_url }}" type="application/x-mpegURL">
-        Your browser does not support the video tag.
-    </video>
+    <center>
+    <div class="outer">
+        <div class="inner">
+            <div class="main" id="main">
+                <video id="player" class="player" src="{{video_url}}" type="video/mp4" playsinline controls width="100%"></video>
+            </div>
+        </div>
+    </div>
+    </center>
 </body>
+
+    <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const controls = [
+                'play-large',
+                'rewind',
+                'play',
+                'fast-forward',
+                'progress',
+                'current-time',
+                'duration',
+                'captions',
+                'settings',
+                'pip',
+                'airplay',
+                'fullscreen',
+
+            ];
+            const player = new Plyr('.player', { controls });
+        });
+    </script>
+
 </html>
