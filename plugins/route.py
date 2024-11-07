@@ -18,8 +18,6 @@ from info import *
 
 routes = web.RouteTableDef()
 
-
-from aiohttp import web
 from pymongo import MongoClient
 
 # Set up MongoDB client
@@ -27,24 +25,54 @@ mont = MongoClient(DATABASE_URI)
 db = mont[DATABASE_NAME]
 collection = db["footballdb_link"]
 
-from aiohttp import web
 from bson.objectid import ObjectId
 import json
 
+class FileNotFoundError(Exception):
+    pass
+
+# Asynchronous function to fetch file data from MongoDB using ObjectId
+async def get_file(_id):
+    try:
+        # Convert path to ObjectId for MongoDB query
+        object_id = ObjectId(_id)
+        file_info = collection.find_one({"_id": object_id})
+        if not file_info:
+            raise FileNotFoundError(f"File with ID {object_id} not found.")
+        return file_info
+    except Exception as e:
+        raise FileNotFoundError(str(e))
+
+
 @routes.get(r"/football/{path:.*}", allow_head=True)
 async def football_stream_handler(request: web.Request):
-    path = request.match_info['path']
-    # Find the link in the MongoDB database using the provided path (ID)
-    link_record = collection.find_one({"_id": path})
-
-
+    try:
+        # Get the path from the URL (the MongoDB ID)
+        path = request.match_info["path"]
         
-
-    web.Response(
-        content_type='application/json',
-        text=json.dumps({'link': link_record})
-    )
-
+        # Fetch file data using the path
+        file_data = await get_file(path)
+        
+        # If 'link' exists in the file data, return it
+        if "link" in file_data:
+            src = file_data["link"]
+            
+            # Read the football.html template file
+            template_path = "Jisshu/template/football.html"
+            with open(template_path, "r") as file:
+                html_template = file.read()
+            
+            # Replace dynamic content (e.g., {{link}}) with the actual stream URL
+            html_content = html_template.replace("{{link}}", src)
+            
+            # Return the rendered HTML content
+            return web.Response(text=html_content, content_type='text/html')
+        else:
+            return web.Response(text="Stream link not available", status=404)
+    except FileNotFoundError as e:
+        return web.Response(text=f"Error: {str(e)}", status=404)
+    except Exception as e:
+        return web.Response(text=f"Internal Server Error: {str(e)}", status=500)
 
 
 
