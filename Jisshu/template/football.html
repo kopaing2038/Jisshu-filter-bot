@@ -20,6 +20,19 @@
             font-weight: bold;
             margin-top: 20px; /* Space between logo and title */
         }
+        #playButton {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none;
+            padding: 15px 32px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        #playButton:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
     </style>
 </head>
 <body>
@@ -30,6 +43,9 @@
 
     <!-- Football Stream Title -->
     <div id="title">Football Stream</div>
+
+    <!-- Play Button -->
+    <button id="playButton">Play</button>
 
     <div class="outer">
         <div class="inner">
@@ -51,6 +67,7 @@
             hls.loadSource(videoUrl);
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                // Auto-play when the manifest is parsed
                 video.play();
             });
         }
@@ -58,9 +75,21 @@
         else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = videoUrl;
             video.addEventListener('loadedmetadata', function () {
+                // Auto-play when metadata is loaded
                 video.play();
             });
         }
+
+        // Play button functionality
+        document.getElementById('playButton').addEventListener('click', function() {
+            if (video.paused) {
+                video.play(); // Play the video
+                this.textContent = 'Pause'; // Change button text to 'Pause'
+            } else {
+                video.pause(); // Pause the video
+                this.textContent = 'Play'; // Change button text back to 'Play'
+            }
+        });
     </script>
 </body>
 </html>
