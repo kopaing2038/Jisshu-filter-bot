@@ -107,7 +107,7 @@ if 'DYNO' in environ:
     ON_HEROKU = True
 else:
     ON_HEROKU = False
-URL = environ.get("FQDN", "http://my.tpfootball.live")
+URL = environ.get("FQDN", "http://tpfootball.live")
 
 #---------------------------------------------------------------
 #---------------------------------------------------------------
