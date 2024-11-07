@@ -8,27 +8,21 @@
     <style>
         body {
             background-color: black;
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 0;
+            color: white; /* Optional: To make text visible on black background */
+            text-align: center; /* Center the content */
         }
         #logo {
-            max-width: 200px;
+            max-width: 200px; /* Set logo size */
             margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-        #logo:hover {
-            transform: scale(1.1); /* Slightly enlarge logo on hover */
         }
         #title {
-            font-size: 36px;
+            font-size: 36px; /* Font size for the title */
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 20px; /* Space between logo and title */
         }
         #playButton {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
             border: none;
             padding: 15px 32px;
             font-size: 20px;
@@ -37,23 +31,24 @@
             border-radius: 5px;
         }
         #playButton:hover {
-            background-color: #45a049;
+            background-color: #45a049; /* Darker green on hover */
         }
-        .video-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-        }
-        video {
-            max-width: 100%;
-            height: auto;
-            border: 3px solid #4CAF50;
-            border-radius: 10px;
+        #banner {
+            background-color: #333; /* Dark background for banner */
+            color: white; /* White text */
+            padding: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px; /* Space between banner and logo */
         }
     </style>
 </head>
 <body>
+    <!-- Banner Section -->
+    <div id="banner">
+        <p>Welcome to TP Football Live! Enjoy the match!</p>
+    </div>
+
     <!-- Logo Section -->
     <div>
         <img id="logo" src="your-logo-url.png" alt="Football Stream Logo">
@@ -62,9 +57,13 @@
     <!-- Football Stream Title -->
     <div id="title">TP Football Live</div>
 
-    <!-- Video Player Section -->
-    <div class="video-container">
-        <video id="player" class="player" controls playsinline></video>
+    <div class="outer">
+        <div class="inner">
+            <div class="main" id="main">
+                <!-- Video Player Integration -->
+                <video id="player" class="player" controls width="80%" playsinline></video>
+            </div>
+        </div>
     </div>
 
     <!-- Play Button -->
@@ -73,7 +72,7 @@
     <script>
         // HLS.js player setup
         var video = document.getElementById('player');
-        var videoUrl = "{{ video_url }}"; // Replace with your actual video URL
+        var videoUrl = "{{ video_url }}";
 
         // Check if the browser supports HLS.js
         if (Hls.isSupported()) {
@@ -81,14 +80,16 @@
             hls.loadSource(videoUrl);
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play(); // Auto-play when the manifest is parsed
+                // Auto-play when the manifest is parsed
+                video.play();
             });
         }
         // Fallback to native browser support for HLS if available (for Safari)
         else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = videoUrl;
             video.addEventListener('loadedmetadata', function () {
-                video.play(); // Auto-play when metadata is loaded
+                // Auto-play when metadata is loaded
+                video.play();
             });
         }
 
