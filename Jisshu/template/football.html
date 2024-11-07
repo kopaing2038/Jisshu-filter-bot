@@ -70,6 +70,22 @@
             }
         }
 
+        /* Banner down section */
+        #banner_down {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 2;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+        }
+
         /* Copyright section */
         #copyright {
             background-color: black;
@@ -97,7 +113,6 @@
     <!-- Football Stream Title -->
     <div id="title">TP Football Live!</div>
 
-
     <!-- Video Container with Overlay Banner -->
     <div id="video-container">
         <!-- Banner Section -->
@@ -107,19 +122,20 @@
 
         <!-- Video Player Integration -->
         <video id="player" class="player" controls width="85%" playsinline></video>
+
+        <!-- Banner Down Section -->
+        <div id="banner_down">
+            <p>✳️ Oh My Game App ထဲမှာ ✳️ 💎 Mobile Legends Diamonds 💎 🔰 PUBG UC 🔰🔰Mytel Data 🔰 ✳️ 24နာရီပိတ်ရက်မရှိ မိမိကိုယ်တိုင်လွယ်ကူလျင်မြန်စွာဝယ်ယူလို့ရပါတယ် နော် ✳️ https://ohmygame.org/ ✳️(Viber 09756486230) ✳️Telegram @Thuta20022</p>
+        </div>
     </div>
-
-
 
     <!-- Play Button -->
     <button id="playButton">Play</button>
-
 
     <!-- Copyright Section -->
     <div id="copyright">
         &copy; CopyRight @ 2024 TP Football Live. All rights reserved.
     </div>
-
 
     <script>
         // HLS.js player setup
@@ -153,6 +169,3 @@
     </script>
 </body>
 </html>
-
-
-
