@@ -43,6 +43,8 @@ async def get_file(_id):
         raise FileNotFoundError(str(e))
 
 
+
+
 @routes.get(r"/football/{path:.*}", allow_head=True)
 async def football_stream_handler(request: web.Request):
     try:
