@@ -31,18 +31,7 @@ logger.setLevel(logging.ERROR)
 # ] codes add
 
 
-@Client.on_message(filters.private & filters.text & filters.incoming)
-async def pm_search(client, message):
-    await mdb.update_top_messages(message.from_user.id, message.text)
-    bot_id = client.me.id
-    user_id = message.from_user.id    
- #   if user_id in ADMINS: return
-    if str(message.text).startswith('/'):
-        return
-    if await db.get_pm_search_status(bot_id):
-        if 'hindi' in message.text.lower() or 'tamil' in message.text.lower() or 'telugu' in message.text.lower() or 'malayalam' in message.text.lower() or 'kannada' in message.text.lower() or 'english' in message.text.lower() or 'gujarati' in message.text.lower(): 
-            return await auto_filter(client, message)
-        await auto_filter(client, message)
+
 
         
     
